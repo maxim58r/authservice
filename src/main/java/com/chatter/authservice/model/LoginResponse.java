@@ -1,4 +1,11 @@
 package com.chatter.authservice.model;
 
-public record LoginResponse(String token) {
+import lombok.*;
+
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+public class LoginResponse {
+    private String token;
 }

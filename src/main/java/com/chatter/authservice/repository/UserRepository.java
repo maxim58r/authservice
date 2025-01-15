@@ -1,7 +1,11 @@
 package com.chatter.authservice.repository;
 
-import com.chatter.authservice.model.User;
-import org.springframework.data.repository.CrudRepository;
+import com.chatter.authservice.entity.User;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UserRepository extends CrudRepository<User, String> {
+import java.util.Optional;
+
+public interface UserRepository extends JpaRepository<User, Long> {
+    Optional<User> findByUsername(String username);
+
 }
