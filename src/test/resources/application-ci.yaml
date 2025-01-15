@@ -17,4 +17,4 @@ spring:
       port: 6379
 
 embedded-redis:
-  enabled: true
+  enabled: false

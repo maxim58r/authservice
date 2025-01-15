@@ -35,7 +35,7 @@ class RedisConfigTest {
             redisServer.start();
         } else {
             // Testcontainers Redis
-            redisContainer = new GenericContainer<>("redis:7.0.12").withExposedPorts(6379);
+            redisContainer = new GenericContainer<>("redis:6.2.6").withExposedPorts(6379);
             redisContainer.start();
             System.setProperty("spring.redis.host", redisContainer.getHost());
             System.setProperty("spring.redis.port", redisContainer.getMappedPort(6379).toString());
