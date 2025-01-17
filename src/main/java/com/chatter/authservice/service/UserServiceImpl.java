@@ -1,5 +1,6 @@
 package com.chatter.authservice.service;
 
+import com.chatter.authservice.config.adapter.RedisTemplateAdapter;
 import com.chatter.authservice.model.LoginRequest;
 import com.chatter.authservice.entity.User;
 import com.chatter.authservice.repository.UserRepository;
@@ -13,15 +14,14 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
-import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
 @Service
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
-    private final RedisTemplate<String, Object> redisTemplate;
     private final BCryptPasswordEncoder passwordEncoder;
+    private final RedisTemplateAdapter redisTemplateAdapter;
 
     @Value("${jwt.secret}")
     private String jwtSecret;
@@ -29,11 +29,13 @@ public class UserServiceImpl implements UserService {
     @Value("${jwt.expiration}")
     private long jwtExpirationMs;
 
-    public UserServiceImpl(UserRepository userRepository, RedisTemplate<String, Object> redisTemplate) {
+
+    public UserServiceImpl(UserRepository userRepository, RedisTemplateAdapter redisTemplateAdapter) {
         this.userRepository = userRepository;
-        this.redisTemplate = redisTemplate;
+        this.redisTemplateAdapter = redisTemplateAdapter;
         this.passwordEncoder = new BCryptPasswordEncoder();
     }
+
 
     @Transactional
     @Override
@@ -44,7 +46,7 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     public void logout(String username) {
-        redisTemplate.delete("token:" + username);
+        redisTemplateAdapter.deleteToken("token:" + username);
     }
 
     @Override
@@ -78,10 +80,10 @@ public class UserServiceImpl implements UserService {
     }
 
     public void cacheToken(String username, String token) {
-        redisTemplate.opsForValue().set("token:" + username, token, 1, TimeUnit.HOURS);
+        redisTemplateAdapter.cacheToken("token:" + username, token, 1, TimeUnit.HOURS);
     }
 
     public String getToken(String username) {
-        return (String) redisTemplate.opsForValue().get("token:" + username);
+        return (String) redisTemplateAdapter.getToken("token:" + username);
     }
 }
