@@ -40,3 +40,9 @@ logging:
 jwt:
   secret: secret_key
   expiration: 3600000 # in milliseconds (1 hour)
+
+management:
+  endpoint:
+    health:
+      probes:
+        enabled: true
