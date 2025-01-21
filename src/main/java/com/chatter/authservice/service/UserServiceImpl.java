@@ -5,8 +5,6 @@ import com.chatter.authservice.model.LoginRequest;
 import com.chatter.authservice.entity.User;
 import com.chatter.authservice.repository.UserRepository;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.security.Keys;
-import io.jsonwebtoken.security.SecretKeyBuilder;
 import jakarta.transaction.Transactional;
 import jakarta.validation.constraints.NotNull;
 import lombok.extern.slf4j.Slf4j;
@@ -15,7 +13,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
-import java.security.Key;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
@@ -52,7 +49,7 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     public void logout(String username) {
-        redisTemplateAdapter.deleteToken("token:" + username);
+        redisTemplateAdapter.deleteToken(String.format("token:%s", username));
     }
 
     @Override
