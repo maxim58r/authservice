@@ -6,7 +6,6 @@ spring:
     name: authservice
 
   datasource:
-    # Если переменной IFT_DATASOURCE_URL нет, берётся дефолт (локальный IP и порт).
     url: ${IFT_DATASOURCE_URL:jdbc:postgresql://192.168.1.35:32172/postgres_auth}
     username: ${IFT_DATASOURCE_USERNAME:postgres}
     password: ${IFT_DATASOURCE_PASSWORD:postgres}
@@ -25,11 +24,9 @@ spring:
   security:
     user:
       name: admin
-      # Если хотите, можно оставить password здесь
       # password: admin
 
 redis:
-  # Аналогично: если не задали IFT_REDIS_HOST, то берётся локальное 192.168.1.35
   host: ${IFT_REDIS_HOST:192.168.1.35}
   port: ${IFT_REDIS_PORT:31015}
   connect-timeout: 60000
@@ -46,7 +43,7 @@ logging:
 
 jwt:
   secret: secret_key
-  expiration: 3600000 # 1 час
+  expiration: 3600000
 
 management:
   endpoint:

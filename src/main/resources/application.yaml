@@ -22,7 +22,6 @@ spring:
   security:
     user:
       name: admin
-      # Uncomment and set a secure password if required:
       # password: my-secure-password
 
 redis:
@@ -39,7 +38,7 @@ logging:
 
 jwt:
   secret: secret_key
-  expiration: 3600000 # in milliseconds (1 hour)
+  expiration: 3600000
 
 management:
   endpoint:

@@ -28,7 +28,7 @@ public class UserServiceImpl implements UserService {
     private String jwtSecret;
 
     @Value("${jwt.expiration}")
-    private long jwtExpirationMs;
+    private Long jwtExpirationMs;
 
 
     public UserServiceImpl(UserRepository userRepository, RedisTemplateAdapter redisTemplateAdapter) {
