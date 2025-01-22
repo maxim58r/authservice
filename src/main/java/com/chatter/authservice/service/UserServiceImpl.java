@@ -79,6 +79,7 @@ public class UserServiceImpl implements UserService {
                 .subject(username)
                 .issuedAt(new Date())
                 .expiration(new Date(System.currentTimeMillis() + jwtExpirationMs))
+//                .expiration(new Date(System.currentTimeMillis() + Long.parseLong(jwtExpirationMs)))
                 .signWith(key)
                 .compact();
     }
