@@ -15,7 +15,9 @@ public class SecurityConfig {
     public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {
         http
                 .authorizeExchange(exchanges -> exchanges
-                        .pathMatchers("/actuator/health/**", "/actuator/prometheus")
+                        .pathMatchers("/actuator/health/**",
+                                "/actuator/prometheus",
+                                "/api/v1/**")
                         .permitAll() // Разрешить доступ к /actuator/health без авторизации
                         .anyExchange()
                         .authenticated()                // Остальные запросы требуют авторизации
