@@ -34,12 +34,9 @@ redis:
 
 logging:
   level:
-    org:
-      springframework.boot.context.properties: DEBUG
-      springframework: DEBUG
-      hibernate:
-        SQL: DEBUG
-        type.descriptor.sql.BasicBinder: TRACE
+    root: DEBUG
+    pattern:
+      console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
 
 jwt:
   secret: secret_key
