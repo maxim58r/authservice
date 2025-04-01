@@ -1,4 +1,4 @@
-package com.chatter.authservice.entity;
+package com.chatter.authservice.user.domain;
 
 import jakarta.persistence.*;
 import lombok.*;

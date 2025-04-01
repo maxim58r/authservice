@@ -1,4 +1,4 @@
-package com.chatter.authservice.config.adapter;
+package com.chatter.authservice.user.infrastructure.adapter;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.RedisTemplate;

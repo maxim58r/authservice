@@ -47,6 +47,7 @@ build/
 
 # Исключить target папку Maven
 /target/
+/target/spring-modulith-docs/
 
 # Исключить лог-файлы
 *.log

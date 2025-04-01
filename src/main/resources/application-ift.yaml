@@ -21,6 +21,11 @@ spring:
     properties:
       hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
 
+  elasticsearch:
+    uris: ${ELASTICSEARCH_URI}
+    username: ${ELASTICSEARCH_USERNAME}
+    password: ${ELASTICSEARCH_PASSWORD}
+
   security:
     user:
       name: admin
@@ -37,10 +42,11 @@ embedded-redis:
 
 logging:
   level:
-    root: warn
-#    org.springframework.boot.context.properties: DEBUG
-#    org.hibernate.SQL: DEBUG
-#    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+    root: INFO
+    org.springframework: DEBUG
+#  logstash:
+#    host: ${ELASTIC_HOST:"192.168.1.35:30429"} # Адрес вашего Elasticsearch.
+#    port: 9200
 
 jwt:
   secret: secret_key

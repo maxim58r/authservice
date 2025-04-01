@@ -7,19 +7,31 @@ spring:
 #  autoconfigure:
 #    exclude:
 #      - org.springframework.boot.actuate.autoconfigure.availability.AvailabilityProbesHealthEndpointGroups
+
+#  Чтобы пользователь authservice_user по умолчанию всегда попадал в нужную схему, нужно выполнить в PostgreSQL
+#  ALTER ROLE authservice_user SET search_path TO authservice;
   datasource:
-    url: jdbc:postgresql://192.168.1.35:32172/postgres_auth
-    username: postgres
-    password: postgres
+    url: jdbc:postgresql://192.168.1.35:32172/chatter
+    username: authservice_user
+    password: FufibcXDGvVgPg5qcIf8YS9z462QbIN6FbbeS3kDpbiCNBVSzioHrPm4NxpJw8G4
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate.default_schema: authservice
+      hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
+
   liquibase:
     enabled: true
     change-log: classpath:db/changelog/db.changelog-master.xml
-  jpa:
-    hibernate:
-      ddl-auto: validate
-    show-sql: true
-    properties:
-      hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
+    default-schema: authservice
+
+  elasticsearch:
+    uris: https://elastic.msv-tech.ru:9200
+    username: elastic
+    password: "5LtfVTJc002wyaI499n4oj45"
 
   security:
     user:
@@ -28,18 +40,17 @@ spring:
 
 redis:
   host: 192.168.1.35
-  port: 31015
+  port: 32648
   connect-timeout: 60000
   password: "CfAb11y5gLQ3quvc"
 
 logging:
   level:
-    org:
-      springframework.boot.context.properties: DEBUG
-      springframework: DEBUG
-      hibernate:
-        SQL: DEBUG
-        type.descriptor.sql.BasicBinder: TRACE
+    root: INFO
+    org.springframework: DEBUG
+  logstash:
+    host: 192.168.1.35
+    port: 30429
 
 jwt:
   secret: secret_key
@@ -48,14 +59,12 @@ jwt:
 management:
   endpoint:
     health:
-      show-details: always
       probes:
         enabled: true
   endpoints:
     web:
       exposure:
         include: health, info, prometheus
-
   prometheus:
     metrics:
       export:

@@ -1,9 +1,9 @@
-package com.chatter.authservice.controller;
+package com.chatter.authservice.user.infrastructure.controller;
 
-import com.chatter.authservice.service.UserService;
-import com.chatter.authservice.entity.User;
-import com.chatter.authservice.model.LoginRequest;
-import com.chatter.authservice.model.LoginResponse;
+import com.chatter.authservice.user.application.LoginUser;
+import com.chatter.authservice.user.domain.User;
+import com.chatter.authservice.user.api.LoginRequest;
+import com.chatter.authservice.user.api.LoginResponse;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,13 +17,13 @@ import org.springframework.web.bind.annotation.*;
 @AllArgsConstructor
 public class UserController {
 
-    private final UserService userService;
+    private final LoginUser loginUser;
 
     @PostMapping("/register")
     public ResponseEntity<String> register(@Valid @RequestBody User user) {
         log.info("Registering user {}", user);
         try {
-            userService.registerUser(user);
+            loginUser.registerUser(user);
             log.info("User registered successfully");
             return ResponseEntity.status(HttpStatus.CREATED).body("User registered successfully");
         } catch (Exception e) {
@@ -36,7 +36,7 @@ public class UserController {
     public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest loginRequest) {
         log.info("Login request {}", loginRequest);
         try {
-            String token = userService.authenticateUser(loginRequest);
+            String token = loginUser.authenticateUser(loginRequest);
             log.info("Login successful");
             return ResponseEntity.ok(new LoginResponse(token));
         } catch (Exception e) {
@@ -48,7 +48,7 @@ public class UserController {
     @PostMapping("/logout")
     public ResponseEntity<String> logout(@RequestParam String username) {
         log.info("Logout request {}", username);
-        userService.logout(username);
+        loginUser.logout(username);
         log.info("Logout successful");
         return ResponseEntity.ok("Logged out successfully");
     }

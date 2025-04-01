@@ -1,9 +1,9 @@
-package com.chatter.authservice.service;
+package com.chatter.authservice.user.application;
 
-import com.chatter.authservice.config.adapter.RedisTemplateAdapter;
-import com.chatter.authservice.model.LoginRequest;
-import com.chatter.authservice.entity.User;
-import com.chatter.authservice.repository.UserRepository;
+import com.chatter.authservice.user.infrastructure.adapter.RedisTemplateAdapter;
+import com.chatter.authservice.user.api.LoginRequest;
+import com.chatter.authservice.user.domain.User;
+import com.chatter.authservice.user.domain.UserRepository;
 import io.jsonwebtoken.Jwts;
 import jakarta.transaction.Transactional;
 import jakarta.validation.constraints.NotNull;
@@ -18,7 +18,7 @@ import java.util.concurrent.TimeUnit;
 
 @Slf4j
 @Service
-public class UserServiceImpl implements UserService {
+public class LoginLoginUserUseCase implements LoginUser {
 
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder passwordEncoder;
@@ -31,7 +31,7 @@ public class UserServiceImpl implements UserService {
     private Long jwtExpirationMs;
 
 
-    public UserServiceImpl(UserRepository userRepository, RedisTemplateAdapter redisTemplateAdapter) {
+    public LoginLoginUserUseCase(UserRepository userRepository, RedisTemplateAdapter redisTemplateAdapter) {
         this.userRepository = userRepository;
         this.redisTemplateAdapter = redisTemplateAdapter;
         this.passwordEncoder = new BCryptPasswordEncoder();
@@ -61,10 +61,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public String authenticateUser(@NotNull LoginRequest loginRequest) {
-        User user = userRepository.findByUsername(loginRequest.getUsername())
+        User user = userRepository.findByUsername(loginRequest.username())
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
-        if (!passwordEncoder.matches(loginRequest.getPassword(), user.getPassword())) {
+        if (!passwordEncoder.matches(loginRequest.password(), user.getPassword())) {
             throw new RuntimeException("Invalid password");
         }
 
