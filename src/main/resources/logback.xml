@@ -1,13 +1,15 @@
 <configuration>
-    <property name="LOG_PATH" value="/var/log/myapp" />
-    <property name="ELASTIC_HOST" value="192.168.1.35:30429" /> <!-- Укажите IP и порт -->
+    <property name="LOG_PATH" value="/logs" />
+    <property name="ELASTIC_HOST" value="192.168.1.35:32029" />
 
+    <!-- Консоль -->
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
         </encoder>
     </appender>
 
+    <!-- Logstash JSON -->
     <appender name="ELASTIC" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
         <destination>${ELASTIC_HOST}</destination>
         <encoder class="net.logstash.logback.encoder.LogstashEncoder">
@@ -15,10 +17,12 @@
         </encoder>
     </appender>
 
-    <appender name="FILE_DEBUG" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${LOG_PATH}/debug.log</file>
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${LOG_PATH}/debug-%d{yyyy-MM-dd}.log</fileNamePattern>
+    <!-- Лог-файл с ротацией по размеру и дате -->
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_PATH}/authservice.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_PATH}/authservice.%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+            <maxFileSize>10MB</maxFileSize>
             <maxHistory>7</maxHistory>
         </rollingPolicy>
         <encoder>
@@ -27,8 +31,8 @@
     </appender>
 
     <root level="INFO">
-        <appender-ref ref="CONSOLE"/>
-        <appender-ref ref="ELASTIC"/>
-        <appender-ref ref="FILE_DEBUG"/>
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="ELASTIC" />
+        <appender-ref ref="FILE" />
     </root>
 </configuration>
