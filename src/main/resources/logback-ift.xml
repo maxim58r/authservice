@@ -1,6 +1,6 @@
 <configuration>
     <property name="LOG_PATH" value="/logs" />
-    <property name="ELASTIC_HOST" value="${ELASTIC_HOST:-logstash.default.svc.cluster.local:5044}" />
+    <property name="ELASTIC_HOST" value="${ELASTIC_HOST:-logstash-svc.default.svc.cluster.local:5044}" />
 
     <!-- Консоль -->
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
