@@ -1,4 +1,4 @@
-package com.chatter.authservice.config;
+package com.chatter.authservice.user.infrastructure.redis;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 

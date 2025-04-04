@@ -1,6 +1,5 @@
-package com.chatter.authservice.repository;
+package com.chatter.authservice.user.domain;
 
-import com.chatter.authservice.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

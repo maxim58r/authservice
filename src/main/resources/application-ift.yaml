@@ -21,6 +21,11 @@ spring:
     properties:
       hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
 
+  elasticsearch:
+    uris: ${ELASTICSEARCH_URI}
+    username: ${ELASTICSEARCH_USERNAME}
+    password: ${ELASTICSEARCH_PASSWORD}
+
   security:
     user:
       name: admin
@@ -34,15 +39,6 @@ redis:
 
 embedded-redis:
   enabled: false
-
-logging:
-  level:
-    root: info
-    org.springframework: warn
-  pattern:
-    console: "%clr(%d{yyyy-MM-dd HH:mm:ss}){blue} %clr(%-5level) %clr(%logger{36}){cyan} - %msg%n"
-
-
 
 jwt:
   secret: secret_key
