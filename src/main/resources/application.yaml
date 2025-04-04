@@ -20,13 +20,13 @@ spring:
       ddl-auto: update
     show-sql: true
     properties:
-#      hibernate.default_schema: authservice
+      hibernate.default_schema: authservice
       hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
 
   liquibase:
     enabled: true
     change-log: classpath:db/changelog/db.changelog-master.xml
-#    default-schema: authservice
+    default-schema: authservice
 
   elasticsearch:
     uris: https://elastic.msv-tech.ru:9200
