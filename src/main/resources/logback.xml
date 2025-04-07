@@ -1,7 +1,6 @@
 <configuration>
+    <springProperty scope="context" name="ELASTIC_HOST" source="ELASTIC_HOST" defaultValue="192.168.1.35:32029" />
     <property name="LOG_PATH" value="/logs" />
-    <property name="ELASTIC_HOST" value="${ELASTIC_HOST:-logstash-svc.default.svc.cluster.local:5044}" />
-
 
     <!-- Консоль -->
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
@@ -18,7 +17,7 @@
         </encoder>
     </appender>
 
-    <!-- Лог-файл с ротацией по размеру и дате -->
+    <!-- Лог-файл с ротацией -->
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${LOG_PATH}/authservice.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
