@@ -32,7 +32,6 @@ spring:
   security:
     user:
       name: admin
-      # password: admin
 
 redis:
   host: ${IFT_REDIS_HOST}
