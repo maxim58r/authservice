@@ -23,7 +23,6 @@ spring:
       hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
       hibernate.default_schema: public
 
-
   elasticsearch:
     uris: ${ELASTICSEARCH_URI}
     username: ${ELASTICSEARCH_USERNAME}
@@ -59,3 +58,8 @@ management:
     metrics:
       export:
         enabled: true
+  health:
+    redis:
+      enabled: false
+    db:
+      enabled: false
