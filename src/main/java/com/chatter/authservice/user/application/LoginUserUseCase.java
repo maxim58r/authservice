@@ -18,7 +18,7 @@ import java.util.concurrent.TimeUnit;
 
 @Slf4j
 @Service
-public class LoginLoginUserUseCase implements LoginUser {
+public class LoginUserUseCase implements LoginUser {
 
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder passwordEncoder;
@@ -31,10 +31,12 @@ public class LoginLoginUserUseCase implements LoginUser {
     private Long jwtExpirationMs;
 
 
-    public LoginLoginUserUseCase(UserRepository userRepository, RedisTemplateAdapter redisTemplateAdapter) {
+    public LoginUserUseCase(UserRepository userRepository, RedisTemplateAdapter redisTemplateAdapter) {
         this.userRepository = userRepository;
         this.redisTemplateAdapter = redisTemplateAdapter;
         this.passwordEncoder = new BCryptPasswordEncoder();
+        log.debug("RedisTemplateAdapter is null: {}", redisTemplateAdapter == null);
+        log.debug("UserRepository is null: {}", userRepository == null);
     }
 
 
