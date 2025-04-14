@@ -1,6 +1,5 @@
 package com.chatter.authservice.user.infrastructure.redis;
 
-import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -19,16 +18,6 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 @EnableConfigurationProperties(RedisProperties.class)
 public class RedisConfig {
     private final RedisProperties redisProperties;
-
-    @PostConstruct
-    public void testConnection() {
-        try (var conn = redisConnectionFactory().getConnection()) {
-            log.info("✅ Successfully connected to Redis: {}", conn.ping());
-        } catch (Exception e) {
-            log.error("❌ Failed to connect to Redis", e);
-        }
-    }
-
 
     @Bean
     public RedisConnectionFactory redisConnectionFactory() {
