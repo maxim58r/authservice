@@ -1,4 +1,4 @@
-FROM openjdk:24
+FROM openjdk:24-jdk
 
 WORKDIR /app
 COPY target/authservice-1.0.0.jar app.jar
