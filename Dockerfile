@@ -1,4 +1,5 @@
-FROM openjdk:24-rc-slim
+FROM eclipse-temurin:24-alpine
+
 
 WORKDIR /app
 COPY target/authservice-1.0.0.jar app.jar
