@@ -1,5 +1,5 @@
 <configuration>
-    <springProperty scope="context" name="ELASTIC_HOST" source="ELASTIC_HOST" defaultValue="192.168.1.35:32029" />
+    <springProperty scope="context" name="ELASTIC_HOST" source="ELASTIC_HOST" defaultValue="192.168.1.35:31400" />
     <property name="LOG_PATH" value="/logs" />
 
     <!-- Консоль -->
